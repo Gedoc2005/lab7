@@ -1,0 +1,94 @@
+﻿@using GissataletMVC.Models
+@model GissataletMVC.Models.SecretNumber
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h3 style="padding : 15px 15px 15px 45% ; margin : 0 auto; background-color : gray; color: black; ">
+            Gissa talet
+        </h3>
+    </div>
+    @using (Html.BeginForm())
+    {
+
+        if (Model.LastGuessedNumber.Outcome != Outcome.Right)
+        {
+
+            @Html.ValidationSummary()
+            @Html.AntiForgeryToken()
+            <div style="padding : 15px 15px 15px 40% ; margin : 0 auto; background-color : lightgreen; ">
+                <p>
+                    <strong>Gissa ett tal mellan 1 och 100</strong>
+                    <input style="width:50px; margin: 1px 8px;" name="number" autofocus disabled="@(!Model.CanMakeGuess)" />
+                    <button type="submit" disabled="@(!Model.CanMakeGuess)">Skicka Gissning</button>
+                </p>
+            </div>
+        }
+        else
+        {
+            <h3 style="padding : 15px 15px 15px 40% ; margin : 0 auto; background-color : lightgreen; color: red;"><strong>Rätt Gissat!</strong></h3>
+        }
+
+
+    }
+
+
+
+    @if (Model.Count > 0)
+    {
+        int number = 1;
+        <p style="padding : 15px 15px 15px 40% ; margin : 0 auto; background-color : gray; color : black; font-size : larger;">@Model.OutcomeGuess</p>
+        <div style="padding : 1px 60px 60px 35% ; margin : 0 auto; background-color : seagreen; ">
+            @foreach (var item in Model.GuessedNumber)
+            {
+                <table class="pull-left" style="width:50px;">
+                    @switch (item.Outcome)
+                    {
+                        case Outcome.Right:
+                            <tr>
+                                <td class="head">@number</td>
+                            </tr>
+                            <tr>
+                                <td class="success">√<br />@item.Number</td>
+                            </tr>
+                            break;
+                        case Outcome.High:
+                        <tr>
+                            <td class="head">@number</td>
+                        </tr>
+                        <tr>
+                            <td class="highValue">↑<br />@item.Number</td>
+                        </tr>
+                            break;
+                        case Outcome.Low:
+                        <tr>
+                            <td class="head">@number</td>
+                        </tr>
+                        <tr>
+                            <td class="lowValue">↓<br />@item.Number</td>
+                        </tr>
+                            break;
+                    }
+                </table>
+                    number++;
+            }
+        </div>
+    }
+    <div class="clearfix"></div><br />
+    <div>@Html.ActionLink("Slumpa Nytt Tal!", "NewPage")</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿body {
+  font-family: "Times New Roman", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+/* Styles for basic forms*/
+
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+}
+.form-group input:not([type=submit]) {
+  width:200px;
+}
+
+/* Styles for validation helpers*/
+.field-validation-error {
+    color: #f00;
+}
+.field-validation-valid {
+    display: none;
+}
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+.validation-summary-valid {
+    display: none;
+}
+.head{
+    background-color: black;
+    color: white;
+    
+}
+.success {
+    background-color: lightgreen;
+}
+.highValue {
+    background-color: lightblue;
+}
+.lowValue {
+    background-color: lightpink;
+}
+
